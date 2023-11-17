@@ -1,0 +1,22 @@
+{
+    "name": "vptrading/telebirr-ussd-laravel",
+    "description": "Laravel package for quick telebirr ussd payment gateway integration",
+    "autoload": {
+        "psr-4": {
+            "Vptrading\\TelebirrUssd\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alazar Kassahun",
+            "email": "alazarkassahun@vptrading.et"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vptrading\\TelebirrUssd\\TelebirrUssdServiceProvider"
+            ]
+        }
+    }
+}
