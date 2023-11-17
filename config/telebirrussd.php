@@ -9,7 +9,7 @@ return [
 
     'operator_id' => env('TELEBIRR_USSD_OPERATOR_ID', ''),
 
-    'security_credentials' => env('TELEBIRR_USSD_SECURITY_CREDENTIALS', ''),
+    'security_credential' => env('TELEBIRR_USSD_SECURITY_CREDENTIALS', ''),
 
     'short_code' => env('TELEBIRR_USSD_SHORT_CODE', ''),
 
