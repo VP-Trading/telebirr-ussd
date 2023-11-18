@@ -1,4 +1,4 @@
-<p align="center"><a href="https://zergaw.com"><img src="/imgs/logo.png" alt="VP Logo"></a></p>
+<p align="center"><a href="https://vptrading.et"><img src="/imgs/logo.png" alt="VP Logo"></a></p>
 
 <h1 align="center">Laravel Pakcage For<br> Telebirr</h1>
 
