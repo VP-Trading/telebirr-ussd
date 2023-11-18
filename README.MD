@@ -50,7 +50,7 @@ In order to send a buy request using Telebirr<sup>&reg;</sup> all you have to do
 ```
 use Vptrading\TelebirrUssd\TelebirrUssd;
 
-$response = Telebirr::push(1, 0912345678,VP_212fw323r3);
+$response = Telebirr::push(1, '0912345678', 'VP_212fw323r3');
 ```
 
 > Note: The `ShortCode` is provided by Ethio Telecom
