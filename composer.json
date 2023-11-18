@@ -1,6 +1,7 @@
 {
     "name": "vptrading/telebirr-ussd-laravel",
     "description": "Laravel package for quick telebirr ussd payment gateway integration",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Vptrading\\TelebirrUssd\\": "src/"
