@@ -8,24 +8,11 @@ This Laravel package is a featherweight package to integrate Telebirr USSD<sup>&
 
 # Usage Guide
 
-This is a private package, meaning there is no way to require it using composer.
-
 ### Step One
-
-```
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "git@github.com:VP-Trading/telebirr-ussd.git"
-    }
-],
-```
-
-### Step Two
 
 Run `composer require vptrading/telebirr-ussd-laravel`
 
-### Step Three
+### Step Two
 
 Run the artisan command to publish the zergawaICSP/telebirr-laravel configuration file.
 
@@ -35,7 +22,7 @@ php artisan vendor:publish --provider="Vptrading\TelebirrUssd\TelebirrUssdServic
 
 After running that command you will see a `telebirr.php` configuration file in your application's `config` directory.
 
-### Step Four
+### Step Three
 
 Open the `telebirr.php` configuration file and add the key's provided to you from Telebirr<sup>&reg;</sup>
 
