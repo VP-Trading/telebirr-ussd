@@ -15,8 +15,8 @@ class TelebirrUssdServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(TelebirrUssd::class, function () {
-            return new TelebirrUssd();
+        $this->app->singleton('telebirr-ussd', function () {
+            return new TelebirrUssd;
         });
     }
 }
