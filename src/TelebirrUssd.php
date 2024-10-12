@@ -7,7 +7,7 @@ use SimpleXMLElement;
 
 class TelebirrUssd
 {
-    public static function push($amount, $phone, $reference)
+    public function push($amount, $phone, $reference)
     {
         $xml = new SimpleXMLElement('<api:Request></api:Request>', LIBXML_NOERROR, false, 'api', true);
 
@@ -73,7 +73,7 @@ class TelebirrUssd
         return $array;
     }
 
-    public static function deconstruct($data)
+    public function deconstruct($data)
     {
         $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:', 'com:'], '', $data);
         $cxml = simplexml_load_string($clean_xml);

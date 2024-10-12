@@ -1,11 +1,17 @@
 {
     "name": "vptrading/telebirr-ussd-laravel",
     "description": "Laravel package for quick telebirr ussd payment gateway integration",
+    "version": "1.1",
     "license": "MIT",
     "require": {
-        "php": "^7.4 || ^8.0",
-        "illuminate/support": "^10.0"
+        "php": "^8.0",
+        "illuminate/support": "~10|~11"
     },
+    "homepage": "https://github.com/VP-Trading/telebirr-ussd",
+    "keywords": [
+        "Laravel",
+        "TelebirrUssd"
+    ],
     "autoload": {
         "psr-4": {
             "Vptrading\\TelebirrUssd\\": "src/"
@@ -14,14 +20,18 @@
     "authors": [
         {
             "name": "Alazar Kassahun",
-            "email": "alazarkassahun@vptrading.et"
+            "email": "alazarkassahun@vptrading.et",
+            "homepage": "https://vptrading.et"
         }
     ],
     "extra": {
         "laravel": {
             "providers": [
                 "Vptrading\\TelebirrUssd\\TelebirrUssdServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "TelebirrUssd": "Vptrading\\TelebirrUssd\\Facades\\TelebirrUssd"
+            }
         }
     }
 }
