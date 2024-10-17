@@ -14,7 +14,7 @@ Run `composer require vptrading/telebirr-ussd-laravel`
 
 ### Step Two
 
-Run the artisan command to publish the zergawaICSP/telebirr-laravel configuration file.
+Run the artisan command to publish the Vptrading\TelebirrUssd configuration file.
 
 ```
 php artisan vendor:publish --provider="Vptrading\TelebirrUssd\TelebirrUssdServiceProvider"
