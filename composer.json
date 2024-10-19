@@ -1,7 +1,7 @@
 {
     "name": "vptrading/telebirr-ussd-laravel",
     "description": "Laravel package for quick telebirr ussd payment gateway integration",
-    "version": "2.0",
+    "version": "1.1",
     "license": "MIT",
     "require": {
         "php": "^8.0",
