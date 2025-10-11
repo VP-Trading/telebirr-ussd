@@ -39,12 +39,12 @@ class TelebirrUssd
 
     private function preparePhoneNumber(string $phone): string
     {
-        if (preg_match("regex:/^((\+2519|09|9){1})\d{8}$/i", $phone, $matches) !== 1) {
+        if (preg_match("/^((\+2519|09|9){1})\d{8}$/i", $phone, $matches) !== 1) {
             throw ValidationException::withMessages([
                 'phone' => 'The phone you passed is not in correctly formatted. Please follow one of the following format: +251912345678, 912345678, or 0912345678',
             ]);
         } else {
-            $phone = '251'.substr($matches[0], -9);
+            $phone = '251' . substr($matches[0], -9);
         }
 
         return $phone;
@@ -101,7 +101,7 @@ class TelebirrUssd
 
         $soapFooter = '</soapenv:Body></soapenv:Envelope>';
 
-        $xmlRequest = $soapHeader.$cleanXml.$soapFooter;
+        $xmlRequest = $soapHeader . $cleanXml . $soapFooter;
 
         return $xmlRequest;
     }
