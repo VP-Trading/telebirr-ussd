@@ -1,11 +1,20 @@
 {
     "name": "vptrading/telebirr-ussd-laravel",
     "description": "Laravel package for quick telebirr ussd payment gateway integration",
-    "version": "1.1",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "illuminate/support": "~10|~11"
+        "php": "^8.2",
+        "illuminate/http": "^11.0 || ^12.0",
+        "moneyphp/money": "^4.7"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.12.0 || ^10.1",
+        "phpunit/phpunit": "^10.5.35 || ^11.5.15",
+        "pestphp/pest": "^2.0 || ^3.0 || ^4.0",
+        "laravel/pint": "^1.24",
+        "rector/rector": "^2.1",
+        "larastan/larastan": "^3.6",
+        "pestphp/pest-plugin-type-coverage": "^3.6"
     },
     "homepage": "https://github.com/VP-Trading/telebirr-ussd",
     "keywords": [
@@ -32,6 +41,26 @@
             "aliases": {
                 "TelebirrUssd": "Vptrading\\TelebirrUssd\\Facades\\TelebirrUssd"
             }
+        }
+    },
+    "scripts": {
+        "refactor": "rector",
+        "lint": "pint",
+        "analyze": "phpstan",
+        "test:lint": "pint --test",
+        "test:refactor": "rector --only-suffix=Test.php",
+        "test": [
+            "@lint",
+            "@refactor",
+            "@test:lint",
+            "@test:refactor",
+            "@analyze",
+            "pest"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }

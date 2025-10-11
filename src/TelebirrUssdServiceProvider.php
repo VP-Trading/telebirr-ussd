@@ -9,7 +9,7 @@ class TelebirrUssdServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/telebirrussd.php' => config_path('telebirrussd.php')
+            __DIR__.'/../config/telebirrussd.php' => config_path('telebirrussd.php'),
         ]);
     }
 

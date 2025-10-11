@@ -3,11 +3,54 @@
 namespace Vptrading\TelebirrUssd;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
 use SimpleXMLElement;
 
 class TelebirrUssd
 {
-    public function push($amount, $phone, $reference, array $httpOptions = [])
+    public function push(float $amount, string $phone, string $reference, array $httpOptions = [])
+    {
+        $phone = $this->preparePhoneNumber($phone);
+        $xmlRequest = $this->prepareXmlRequest($amount, $phone, $reference);
+
+        $response = Http::withOptions($httpOptions)
+            ->send('post', config('telebirrussd.url'), options: [
+                'body' => $xmlRequest,
+                'verify' => false,
+            ]);
+
+        $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:'], '', $response->body());
+        $cxml = simplexml_load_string($clean_xml);
+        $json = json_encode($cxml);
+        $array = json_decode($json, true);
+
+        return $array;
+    }
+
+    public function deconstruct($data)
+    {
+        $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:', 'com:'], '', $data);
+        $cxml = simplexml_load_string($clean_xml);
+        $json = json_encode($cxml);
+        $array = json_decode($json, true);
+
+        return $array;
+    }
+
+    private function preparePhoneNumber(string $phone): string
+    {
+        if (preg_match("regex:/^((\+2519|09|9){1})\d{8}$/i", $phone, $matches) !== 1) {
+            throw ValidationException::withMessages([
+                'phone' => 'The phone you passed is not in correctly formatted. Please follow one of the following format: +251912345678, 912345678, or 0912345678',
+            ]);
+        } else {
+            $phone = '251'.substr($matches[0], -9);
+        }
+
+        return $phone;
+    }
+
+    private function prepareXmlRequest(float $amount, $phone, $reference)
     {
         $xml = new SimpleXMLElement('<api:Request></api:Request>', LIBXML_NOERROR, false, 'api', true);
 
@@ -25,7 +68,7 @@ class TelebirrUssd
         $caller->addChild('req:req:ResultURL', config('telebirrussd.result_url'));
 
         $header->addChild('req:req:KeyOwner', '1');
-        $header->addChild('req:req:Timestamp', now()->format("YmdHis"));
+        $header->addChild('req:req:Timestamp', now()->format('YmdHis'));
 
         $identity = $body->addChild('req:req:Identity');
 
@@ -58,29 +101,8 @@ class TelebirrUssd
 
         $soapFooter = '</soapenv:Body></soapenv:Envelope>';
 
-        $xmlRequest = $soapHeader . $cleanXml . $soapFooter;
+        $xmlRequest = $soapHeader.$cleanXml.$soapFooter;
 
-        $response = Http::withOptions($httpOptions)
-            ->send('post', config('telebirrussd.url'), options: [
-                'body' => $xmlRequest,
-                'verify' => false
-            ]);
-
-        $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:'], '', $response->body());
-        $cxml = simplexml_load_string($clean_xml);
-        $json = json_encode($cxml);
-        $array = json_decode($json, true);
-
-        return $array;
-    }
-
-    public function deconstruct($data)
-    {
-        $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:', 'com:'], '', $data);
-        $cxml = simplexml_load_string($clean_xml);
-        $json = json_encode($cxml);
-        $array = json_decode($json, true);
-
-        return $array;
+        return $xmlRequest;
     }
 }

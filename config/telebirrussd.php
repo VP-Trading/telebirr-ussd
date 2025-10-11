@@ -13,5 +13,5 @@ return [
 
     'short_code' => env('TELEBIRR_USSD_SHORT_CODE', ''),
 
-    'url' => env('TELEBIRR_USSD_URL', '')
+    'url' => env('TELEBIRR_USSD_URL', ''),
 ];
