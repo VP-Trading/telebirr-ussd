@@ -7,7 +7,7 @@ use SimpleXMLElement;
 
 class TelebirrUssd
 {
-    public function push($amount, $phone, $reference)
+    public function push($amount, $phone, $reference, array $httpOptions = [])
     {
         $xml = new SimpleXMLElement('<api:Request></api:Request>', LIBXML_NOERROR, false, 'api', true);
 
@@ -60,10 +60,11 @@ class TelebirrUssd
 
         $xmlRequest = $soapHeader . $cleanXml . $soapFooter;
 
-        $response = Http::send('post', config('telebirrussd.url'), options: [
-            'body' => $xmlRequest,
-            'verify' => false
-        ]);
+        $response = Http::withOptions($httpOptions)
+            ->send('post', config('telebirrussd.url'), options: [
+                'body' => $xmlRequest,
+                'verify' => false
+            ]);
 
         $clean_xml = str_ireplace(['soapenv:', 'res:', 'api:'], '', $response->body());
         $cxml = simplexml_load_string($clean_xml);
